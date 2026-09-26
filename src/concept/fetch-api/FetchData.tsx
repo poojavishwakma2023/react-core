@@ -1,5 +1,6 @@
 import {useEffect,useState} from 'react'
 import { useUser } from '../context/UserContext'
+import { useTheme } from '../context/ThemeContext'
 
 // next - debounce , loading ,error handling 
 
@@ -21,6 +22,8 @@ const Fetchdata = ()=>{
     const [query,setQuery]=useState('')
 
     const  {user} = useUser()
+    const {theme , setTheme} =useTheme()
+
 
     useEffect (()=>{
         getData()
@@ -63,7 +66,15 @@ const Fetchdata = ()=>{
     }
 
     return (
-        <div>
+        <div className= {theme=='light'?'light':'dark'}>
+
+      <button
+        onClick={() =>
+          setTheme(theme === "light" ? "dark" : "light")
+        }
+      >
+        Change Theme
+      </button>
            <p>hey! {user.name} you can  fetching products data </p> 
             <input 
             placeholder='serach products ....'
